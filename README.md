@@ -74,20 +74,20 @@ portfolio-generator/
 ---
 
 # Usage
-Register or Log In:
+-Register or Log In:
 
-Register a new account or log in if you already have one.
+-Register a new account or log in if you already have one.
 
-Fill Out Your Portfolio:
+-Fill Out Your Portfolio:
 
-Navigate to the Create CV page.
+-Navigate to the Create CV page.
 
-Fill out your personal information, skills, education, work experience, and projects.
+-Fill out your personal information, skills, education, work experience, and projects.
 
-Save your progress or generate a PDF.
+-Save your progress or generate a PDF.
 
-Generate PDF:
+-Generate PDF:
 
-Click the Save and Generate PDF button to download your portfolio as a PDF.
+-Click the Save and Generate PDF button to download your portfolio as a PDF.
 ---
-## Contribution : MD. IMRAN KHAN   2021-3-60-206
+## -Contribution : MD. IMRAN KHAN   2021-3-60-206
