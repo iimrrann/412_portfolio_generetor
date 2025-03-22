@@ -53,7 +53,7 @@ Follow these steps to set up and run the project locally.
    git clone https://github.com/your-username/portfolio-generator.git
    cd portfolio-generator
 ---
-## File structure
+# File structure
 
 portfolio-generator/
 ├── cv_generator/              # Django app for portfolio management
@@ -73,7 +73,7 @@ portfolio-generator/
 ├── README.md                  # Project documentation
 ---
 
-## Usage
+# Usage
 Register or Log In:
 
 Register a new account or log in if you already have one.
@@ -85,9 +85,9 @@ Navigate to the Create CV page.
 Fill out your personal information, skills, education, work experience, and projects.
 
 Save your progress or generate a PDF.
----
+
 Generate PDF:
 
 Click the Save and Generate PDF button to download your portfolio as a PDF.
-
+---
 ## Contribution : MD. IMRAN KHAN   2021-3-60-206
