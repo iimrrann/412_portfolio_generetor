@@ -24,7 +24,7 @@ The **Portfolio Generator** is a web application built with Django that allows u
 
 ## Screenshots
 
-![Login Page](screenshots/login.png)
+![Login Page](F:\412\portfolio_generator\demo\1.PNG)
 ![Dashboard](screenshots/dashboard.png)
 ![CV Form](screenshots/cv_form.png)
 ![Generated PDF](screenshots/pdf.png)
