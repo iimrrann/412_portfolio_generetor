@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - {{ profile.full_name }}</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        h1 { color: #333; }
+        .section { margin-bottom: 20px; }
+        .section h2 { border-bottom: 2px solid #333; }
+    </style>
+</head>
+<body>
+    <h1>{{ profile.full_name }}</h1>
+    <p>{{ profile.contact_info }}</p>
+    <p>{{ profile.bio }}</p>
+
+    <div class="section">
+        <h2>Skills</h2>
+        <ul>
+            {% for skill in skills %}
+                <li>{{ skill.skill_name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Education</h2>
+        <ul>
+            {% for edu in education %}
+                <li>{{ edu.institute }} - {{ edu.degree }} ({{ edu.year }}) - {{ edu.grade }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Work Experience</h2>
+        <ul>
+            {% for exp in work_experience %}
+                <li>{{ exp.company_name }} ({{ exp.job_duration }}) - {{ exp.job_responsibilities }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Projects</h2>
+        <ul>
+            {% for project in projects %}
+                <li>{{ project.project_title }} - {{ project.project_description }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

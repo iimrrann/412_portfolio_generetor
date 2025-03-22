@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Generator</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+{% block content %}
+<section class="hero">
+    <div class="hero-content">
+        <h1>Create Your Professional CV in Minutes</h1>
+        <p>Build a stunning CV with our easy-to-use tools and templates. Impress employers and land your dream job!</p>
+        <div class="cta-buttons">
+            <a href="{% url 'register' %}" class="button primary">Get Started</a>
+            <a href="#features" class="button secondary">Learn More</a>
+        </div>
+    </div>
+</section>
+
+<section id="features" class="features">
+    <h2>Why Choose Us?</h2>
+    <div class="feature-cards">
+        <div class="card">
+            <h3>Professional Templates</h3>
+            <p>Choose from a variety of modern and professional CV templates.</p>
+        </div>
+        <div class="card">
+            <h3>Easy to Use</h3>
+            <p>Our intuitive interface makes CV creation a breeze.</p>
+        </div>
+        <div class="card">
+            <h3>Download Instantly</h3>
+            <p>Generate and download your CV as a PDF in seconds.</p>
+        </div>
+    </div>
+</section>
+
+<section class="testimonials">
+    <h2>What Our Users Say</h2>
+    <div class="testimonial-cards">
+        <div class="card">
+            <p>"This platform helped me create a CV that got me multiple job offers!"</p>
+            <p class="author">- John Doe</p>
+        </div>
+        <div class="card">
+            <p>"I love the templates and how easy it is to use. Highly recommend!"</p>
+            <p class="author">- Jane Smith</p>
+        </div>
+    </div>
+</section>
+{% endblock %}

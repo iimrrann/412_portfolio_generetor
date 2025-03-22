@@ -1,0 +1,18 @@
+
+{% block content %}
+<div class="template-selection">
+    <h2>Choose a CV Template</h2>
+    <div class="template-cards">
+        <div class="card">
+            <h3>Template 1</h3>
+            <p>Modern and clean design.</p>
+            <a href="{% url 'cv_form' %}?template=1" class="button primary">Use This Template</a>
+        </div>
+        <div class="card">
+            <h3>Template 2</h3>
+            <p>Professional and elegant.</p>
+            <a href="{% url 'cv_form' %}?template=2" class="button primary">Use This Template</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

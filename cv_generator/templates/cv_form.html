@@ -1,0 +1,189 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Generator</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+{% block content %}
+<h2>Create Your Portfolio</h2>
+<form id="portfolio-form" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+
+  <h3>Personal Information</h3>
+  <label for="full_name">Full Name:</label>
+  <input type="text" id="full_name" name="full_name" value="{{ profile.full_name }}" required>
+  <br>
+  <label for="contact_info">Contact Info:</label>
+  <input type="text" id="contact_info" name="contact_info" value="{{ profile.contact_info }}" required>
+  <br>
+  <label for="photo">Upload Photo:</label>
+  <input type="file" id="photo" name="photo" accept="image/*">
+  <br>
+  <label for="bio">Short Bio:</label>
+  <textarea id="bio" name="bio">{{ profile.bio }}</textarea>
+  <br>
+
+  <h3>Skills</h3>
+  <div id="skills-section">
+    <button type="button" id="add-skill">Add Skill</button><br>
+      {% for skill in skills %}
+          <input type="text" name="skill_name" value="{{ skill.skill_name }}">
+      {% endfor %}
+      <input type="text" name="skill_name" placeholder="Skill Name">
+      
+  </div>
+
+  <h3>Education</h3>
+  <div id="education-section">
+    <button type="button" id="add-education">Add Education</button>
+      {% for edu in education %}
+          <div class="education-entry">
+              <input type="text" name="institute" value="{{ edu.institute }}" placeholder="Institute">
+              <input type="text" name="degree" value="{{ edu.degree }}" placeholder="Degree">
+              <input type="text" name="year" value="{{ edu.year }}" placeholder="Year">
+              <input type="text" name="grade" value="{{ edu.grade }}" placeholder="Grade">
+              <button type="button" class="remove-entry">Remove</button>
+          </div>
+      {% endfor %}
+      
+  </div>
+
+  <h3>Work Experience</h3>
+  <div id="experience-section">
+    <button type="button" id="add-experience">Add Experience</button>
+      {% for exp in work_experience %}
+          <div class="experience-entry">
+              <input type="text" name="company_name" value="{{ exp.company_name }}" placeholder="Company Name">
+              <input type="text" name="job_duration" value="{{ exp.job_duration }}" placeholder="Job Duration">
+              <textarea name="job_responsibilities" placeholder="Job Responsibilities">{{ exp.job_responsibilities }}</textarea>
+              <button type="button" class="remove-entry">Remove</button>
+          </div>
+      {% endfor %}
+      
+  </div>
+
+  <h3>Projects</h3>
+  <div id="projects-section">
+    <button type="button" id="add-project">Add Project</button>
+      {% for project in projects %}
+          <div class="project-entry">
+              <input type="text" name="project_title" value="{{ project.project_title }}" placeholder="Project Title">
+              <textarea name="project_description" placeholder="Project Description">{{ project.project_description }}</textarea>
+              <button type="button" class="remove-entry">Remove</button>
+          </div>
+      {% endfor %}
+      
+  </div>
+  <br>
+  <br>
+
+  <button type="submit" id="save-button" name="save">Save</button>
+  <button type="submit" id="generate-pdf-button" name="generate_pdf">Save and Generate PDF</button>
+</form>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("portfolio-form");
+
+    // Handle form submission via JavaScript
+    document.getElementById("save-button").addEventListener("click", function (event) {
+        event.preventDefault();
+        submitForm("save");
+    });
+
+    document.getElementById("generate-pdf-button").addEventListener("click", function (event) {
+        event.preventDefault();
+        submitForm("generate_pdf");
+    });
+
+    function submitForm(action) {
+        const formData = new FormData(form);
+        formData.append(action, true); // Mark which button was clicked
+
+        fetch(form.action, {
+            method: "POST",
+            body: formData,
+        })
+        .then(response => {
+            if (response.ok) {
+                if (action === "save") {
+                    alert("Portfolio saved successfully!");
+                } else if (action === "generate_pdf") {
+                    window.location.href = response.url;
+                }
+            } else {
+                alert("Something went wrong! Please try again.");
+            }
+        })
+        .catch(error => console.error("Error:", error));
+    }
+
+    // Add new skill entry
+    document.getElementById("add-skill").addEventListener("click", function () {
+        let skillInput = document.createElement("input");
+        skillInput.type = "text";
+        skillInput.name = "skill_name";
+        skillInput.placeholder = "Skill Name";
+        document.getElementById("skills-section").appendChild(skillInput);
+    });
+
+    // Add new education entry
+    document.getElementById("add-education").addEventListener("click", function () {
+        let newEntry = document.createElement("div");
+        newEntry.classList.add("education-entry");
+        newEntry.innerHTML = `
+            <input type="text" name="institute" placeholder="Institute">
+            <input type="text" name="degree" placeholder="Degree">
+            <input type="text" name="year" placeholder="Year">
+            <input type="text" name="grade" placeholder="Grade">
+            <button type="button" class="remove-entry">Remove</button>
+        `;
+        document.getElementById("education-section").appendChild(newEntry);
+        attachRemoveListeners();
+    });
+
+    // Add new experience entry
+    document.getElementById("add-experience").addEventListener("click", function () {
+        let newEntry = document.createElement("div");
+        newEntry.classList.add("experience-entry");
+        newEntry.innerHTML = `
+            <input type="text" name="company_name" placeholder="Company Name">
+            <input type="text" name="job_duration" placeholder="Job Duration">
+            <textarea name="job_responsibilities" placeholder="Job Responsibilities"></textarea>
+            <button type="button" class="remove-entry">Remove</button>
+        `;
+        document.getElementById("experience-section").appendChild(newEntry);
+        attachRemoveListeners();
+    });
+
+    // Add new project entry
+    document.getElementById("add-project").addEventListener("click", function () {
+        let newEntry = document.createElement("div");
+        newEntry.classList.add("project-entry");
+        newEntry.innerHTML = `
+            <input type="text" name="project_title" placeholder="Project Title">
+            <textarea name="project_description" placeholder="Project Description"></textarea>
+            <button type="button" class="remove-entry">Remove</button>
+        `;
+        document.getElementById("projects-section").appendChild(newEntry);
+        attachRemoveListeners();
+    });
+
+    // Remove entry (for dynamically added elements)
+    function attachRemoveListeners() {
+        document.querySelectorAll(".remove-entry").forEach(button => {
+            button.addEventListener("click", function () {
+                this.parentElement.remove();
+            });
+        });
+    }
+    
+    attachRemoveListeners();
+});
+</script>
+
+{% endblock %}

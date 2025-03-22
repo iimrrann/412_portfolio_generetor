@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - {{ profile.full_name }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.2; /* Reduced line height for compactness */
+            font-size: 12px; /* Smaller base font size */
+        }
+        h1 {
+            color: #333;
+            margin: 0;
+            font-size: 18px; /* Slightly larger for the name */
+        }
+        .section {
+            margin-bottom: 10px; /* Reduced margin between sections */
+        }
+        .section h2 {
+            border-bottom: 2px solid #333;
+            font-size: 14px; /* Slightly larger for section headings */
+            margin-bottom: 8px; /* Reduced margin below headings */
+        }
+        .profile-photo {
+            width: 100px; /* Slightly smaller photo for compactness */
+            height: 120px; /* Slightly smaller photo for compactness */
+            border-radius: 5px; /* Slight rounding for a professional look */
+            object-fit: cover;
+        }
+        .header {
+            display: table; /* Use table layout for better PDF compatibility */
+            width: 100%;
+            margin-bottom: 10px; /* Reduced margin below header */
+        }
+        .header-left {
+            display: table-cell;
+            vertical-align: top; /* Align content to the top */
+            width: 70%; /* Adjust width as needed */
+        }
+        .header-right {
+            display: table-cell;
+            vertical-align: top; /* Align content to the top */
+            width: 30%; /* Adjust width as needed */
+            text-align: right; /* Align photo to the right */
+        }
+        .header-left p {
+            margin: 2px 0; /* Reduced margin for compactness */
+            font-size: 12px; /* Smaller font size for contact info and bio */
+        }
+        ul {
+            padding-left: 15px; /* Reduced padding for compactness */
+            margin: 3px 0; /* Reduced margin for compactness */
+        }
+        ul li {
+            margin-bottom: 3px; /* Reduced margin between list items */
+            font-size: 12px; /* Smaller font size for list items */
+        }
+        /* Flexbox for header */
+        .header-flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-flex div {
+            width: 60%;
+        }
+
+        .header-flex img {
+            width: 150px;
+            height: auto;
+            border-radius: 50%;
+        }
+
+    </style>
+</head>
+<body>
+  <header class="header-flex">
+    <div>
+      {% if profile.photo %}
+                <img src="F:\412\portfolio_generator\media\profile_photos\imm.jpg" class="profile-photo">
+            {% else %}
+                <p>No profile photo available.</p>
+            {% endif %}
+            <h1>{{ profile.full_name }}</h1>
+            <p>{{ profile.contact_info }}</p>
+            <p>{{ profile.bio }}</p>
+    </div>
+        
+       
+          
+      </header>
+
+    <div class="section">
+        <h2>Skills</h2>
+        <ul>
+            {% for skill in skills %}
+                <li>{{ skill.skill_name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Education</h2>
+        <ul>
+            {% for edu in education %}
+                <li>{{ edu.institute }} - {{ edu.degree }} ({{ edu.year }}) - {{ edu.grade }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Work Experience</h2>
+        <ul>
+            {% for exp in work_experience %}
+                <li>{{ exp.company_name }} ({{ exp.job_duration }}) - {{ exp.job_responsibilities }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Projects</h2>
+        <ul>
+            {% for project in projects %}
+                <li>{{ project.project_title }} - {{ project.project_description }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
